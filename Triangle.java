@@ -2,7 +2,7 @@ import java.awt.*;
 
 /**
  * A triangle that can be manipulated and that draws itself on a canvas.
- * 
+ * testing git status
  * @author  Michael Kšlling and David J. Barnes
  * @version 2016.02.29
  */
