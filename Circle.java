@@ -26,6 +26,7 @@ public class Circle
         yPosition = 90;
         color = "blue";
     }
+    
 
     /**
      * Make this circle visible. If it was already visible, do nothing.
@@ -96,6 +97,7 @@ public class Circle
         yPosition += distance;
         draw();
     }
+    
 
     /**
      * Slowly move the circle horizontally by 'distance' pixels.
