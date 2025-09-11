@@ -12,7 +12,10 @@
 public class Picture
 {
     private Circle pacMan;
+    private Square background;
     private Triangle pacMouth;
+    private Person leg1;
+    private Person leg2;
     private Circle food1;
     private Circle food2;
     private Circle food3;
@@ -28,6 +31,9 @@ public class Picture
      */
     public Picture()
     {
+        leg1 = new Person();
+        leg2 = new Person();
+        background = new Square();
         pacMan = new Circle();
         pacMouth = new Triangle();
         food1 = new Circle();
@@ -47,12 +53,18 @@ public class Picture
     public void draw()
     {
         if(!drawn) {
+            background.changeColor("black");
+            background.changeSize(500);
+            background.moveVertical(-200);
+            background.moveHorizontal(-300);
+            background.makeVisible();
+            
             pacMan.changeSize(120);
             pacMan.changeColor("yellow");
             pacMan.moveHorizontal(-50);
             pacMan.makeVisible();
             
-            pacMouth.changeColor("white");
+            pacMouth.changeColor("black");
             pacMouth.changeSize(55, 125);
             pacMouth.moveHorizontal(82);
             pacMouth.moveVertical(-20);
@@ -75,6 +87,18 @@ public class Picture
             food3.moveHorizontal(170);
             food3.moveVertical(50);
             food3.makeVisible();
+            
+            leg1.moveHorizontal(-190);
+            leg1.moveVertical(-30);
+            leg1.changeColor("blue");
+            leg1.changeSize(40,30);
+            leg1.makeVisible();
+            
+            leg2.moveHorizontal(-170);
+            leg2.moveVertical(-30);
+            leg2.changeColor("blue");
+            leg2.changeSize(40,30);
+            leg2.makeVisible();
             
             ghost.changeColor("blue");
             ghost.changeSize(90);
@@ -114,12 +138,15 @@ public class Picture
      */
     public void setBlackAndWhite()
     {
+        background.changeColor("white");
         pacMan.changeColor("black");
         // layering issue
         pacMouth.changeColor("white");
         food1.changeColor("black");
         food2.changeColor("black");
         food3.changeColor("black");
+        leg1.changeColor("black");
+        leg2.changeColor("black");
         ghost.changeColor("black");
         ghostEye1.changeColor("white");
         ghostEye2.changeColor("white");
@@ -132,26 +159,32 @@ public class Picture
      */
     public void setColor()
     {
+        background.changeColor("black");
         pacMan.changeColor("yellow");
-        pacMouth.changeColor("white");
+        pacMouth.changeColor("black");
         food1.changeColor("orange");
         food2.changeColor("orange");
         food3.changeColor("orange");
+        leg1.changeColor("blue");
+        leg2.changeColor("blue");
         ghost.changeColor("blue");
         ghostEye1.changeColor("white");
         ghostEye2.changeColor("white");
         ghostPupil1.changeColor("blue");
         ghostPupil2.changeColor("blue");
     }
-    
+    /**
+     * Set pac-man in motion to eat the pac-dots and travel off screen. WIP
+     */
     public void eatPacDots(){
-        for(int i = 1; i <= 8; i++){
+        final int LOOP_COUNT = 8;
+        final int STEP_COUNT = 45;
+        for(int i = 1; i <= LOOP_COUNT; i++){
             
-            // Choppy no matter what, could sync the draws
-            // but not the point of the project.
-            for(int j = 0; j < 45; j++){
-                pacMouth.moveHorizontal(1);
+            // Choppy no matter what, could sync the draws with canvas?
+            for(int j = 0; j < STEP_COUNT; j++){
                 pacMan.moveHorizontal(1);
+                pacMouth.moveHorizontal(1);
             }
      //       Thread thread1 = new Thread( () -> pacMan.slowMoveHorizontal(45));
      //       Thread thread2 = new Thread( () -> pacMouth.slowMoveHorizontal(45));
