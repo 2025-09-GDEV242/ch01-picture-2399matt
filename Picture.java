@@ -48,7 +48,7 @@ public class Picture
     }
 
     /**
-     * Draw this picture.
+     * Static draw method for the picture.
      */
     public void draw()
     {
@@ -58,7 +58,7 @@ public class Picture
             background.moveVertical(-200);
             background.moveHorizontal(-300);
             background.makeVisible();
-            
+        
             pacMan.changeSize(120);
             pacMan.changeColor("yellow");
             pacMan.moveHorizontal(-50);
@@ -87,6 +87,7 @@ public class Picture
             food3.moveHorizontal(170);
             food3.moveVertical(50);
             food3.makeVisible();
+            
             
             leg1.moveHorizontal(-190);
             leg1.moveVertical(-30);
@@ -128,6 +129,106 @@ public class Picture
             ghostPupil2.moveHorizontal(-150);
             ghostPupil2.moveVertical(40);
             ghostPupil2.makeVisible();
+    
+            drawn = true;
+        }
+    }
+    
+    // Method to have the picture assemble itself with motion.   
+    public void buildItselfDraw()
+    {
+        if(!drawn) {
+            background.changeColor("black");
+            background.changeSize(500);
+            background.moveVertical(-200);
+            background.moveHorizontal(-300);
+            background.makeVisible();
+        
+            pacMan.changeSize(120);
+            pacMan.changeColor("yellow");
+            pacMan.moveHorizontal(-250);
+            pacMan.makeVisible();
+            pacMan.slowMoveHorizontal(200);
+            
+            pacMouth.changeColor("black");
+            pacMouth.changeSize(55, 125);
+            pacMouth.moveHorizontal(282);
+            pacMouth.moveVertical(-20);
+            pacMouth.makeVisible();
+            pacMouth.slowMoveHorizontal(-200);
+    
+            food1.changeColor("orange");
+            food1.changeSize(20);
+            food1.moveHorizontal(180);
+            food1.moveVertical(150);
+            food1.makeVisible();
+            food1.slowMoveHorizontal(-100);
+            food1.slowMoveVertical(-100);
+            
+            food2.changeColor("orange");
+            food2.changeSize(20);
+            food2.moveHorizontal(225);
+            food2.moveVertical(150);
+            food2.makeVisible();
+            food2.slowMoveHorizontal(-100);
+            food2.slowMoveVertical(-100);
+            
+            food3.changeColor("orange");
+            food3.changeSize(20);
+            food3.moveHorizontal(250);
+            food3.moveVertical(150);
+            food3.makeVisible();
+            food3.slowMoveHorizontal(-80);
+            food3.slowMoveVertical(-100);
+            
+            
+            leg1.moveVertical(-30);
+            leg1.moveHorizontal(-250);
+            leg1.changeColor("blue");
+            leg1.changeSize(40,30);
+            leg1.makeVisible();
+            leg1.slowMoveHorizontal(60);
+            
+            leg2.moveHorizontal(-220);
+            leg2.moveVertical(-30);
+            leg2.changeColor("blue");
+            leg2.changeSize(40,30);
+            leg2.makeVisible();
+            leg2.slowMoveHorizontal(50);
+            
+            ghost.changeColor("blue");
+            ghost.changeSize(90);
+            ghost.moveHorizontal(-220);
+            ghost.makeVisible();
+            ghost.slowMoveHorizontal(40);
+            
+            ghostEye1.changeColor("white");
+            ghostEye1.changeSize(25);
+            ghostEye1.moveHorizontal(-200);
+            ghostEye1.moveVertical(30);
+            ghostEye1.makeVisible();
+            ghostEye1.slowMoveHorizontal(80);
+            
+            ghostEye2.changeColor("white");
+            ghostEye2.changeSize(25);
+            ghostEye2.moveHorizontal(-220);
+            ghostEye2.moveVertical(30);
+            ghostEye2.makeVisible();
+            ghostEye2.slowMoveHorizontal(60);
+            
+            ghostPupil1.changeColor("blue");
+            ghostPupil1.changeSize(12);
+            ghostPupil1.moveHorizontal(-220);
+            ghostPupil1.moveVertical(40);
+            ghostPupil1.makeVisible();
+            ghostPupil1.slowMoveHorizontal(109);
+            
+            ghostPupil2.changeColor("blue");
+            ghostPupil2.changeSize(12);
+            ghostPupil2.moveHorizontal(-220);
+            ghostPupil2.moveVertical(40);
+            ghostPupil2.makeVisible();
+            ghostPupil2.slowMoveHorizontal(70);
     
             drawn = true;
         }
@@ -174,7 +275,8 @@ public class Picture
         ghostPupil2.changeColor("blue");
     }
     /**
-     * Set pac-man in motion to eat the pac-dots and travel off screen. WIP
+     * Set Pac-Man in motion to eat the Pac-Dots and travel off screen. Choppy, would have to modify the draw calls in the 
+     * shapes / canvas class to make it look nice, but close enough.
      */
     public void eatPacDots(){
         final int LOOP_COUNT = 8;
