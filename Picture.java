@@ -1,10 +1,9 @@
 /**
- * This class represents a simple picture. You can draw the picture using
- * the draw method. But wait, there's more: being an electronic picture, it
- * can be changed. You can set it to black-and-white display and back to
- * colors (only after it's been drawn, of course).
- *
- * This class was written as an early example for teaching Java with BlueJ.
+ * This class draws a picture depicting Pac-Man, with a blue ghost on his trail and three pac-dots in front of him.
+ * There are two draw-methods, one statically draws the shapes on the canvas in-place, while the other will
+ * spawn the shapes outside of the canvas and slowly move them into place.
+ * 
+ * The eatPacDots method will move Pac-Man forward, erasing the pac-dots as he passes over them and travels off-screen.
  * 
  * @author  Matthew Witham
  * @version 09.08.2025
@@ -275,18 +274,28 @@ public class Picture
         ghostPupil2.changeColor("blue");
     }
     /**
-     * Set Pac-Man in motion to eat the Pac-Dots and travel off screen. Choppy, would have to modify the draw calls in the 
-     * shapes / canvas class to make it look nice, but close enough.
+     * --Seizure Warning-- Set Pac-Man in motion to eat the Pac-Dots and travel off screen. 
+     * Originally, was going to set a boolean / counter to change mouth color to simulate chomping
+     * but, would need to create a whole new triangle shape (not equilateral)
+     * Settled on keeping the flickering to a minimum (kind of looks like chomping)
+     * by removing the .sleep and erase() calls in the draw method, and putting a longer single delay in the loop.
+     * (He moves WAY too fast without any delay, which would also require major changes).
      */
     public void eatPacDots(){
         final int LOOP_COUNT = 8;
         final int STEP_COUNT = 45;
         for(int i = 1; i <= LOOP_COUNT; i++){
             
-            // Choppy no matter what, could sync the draws with canvas?
             for(int j = 0; j < STEP_COUNT; j++){
-                pacMan.moveHorizontal(1);
-                pacMouth.moveHorizontal(1);
+                pacMan.moveHorizontalNoDraw(1);
+                pacMouth.moveHorizontalNoDraw(1);
+                pacMan.drawFaster();
+                pacMouth.drawFaster();
+            }
+            try{
+                Thread.sleep(75);
+            }catch(Exception e){
+                // Oh well.
             }
      //       Thread thread1 = new Thread( () -> pacMan.slowMoveHorizontal(45));
      //       Thread thread2 = new Thread( () -> pacMouth.slowMoveHorizontal(45));
@@ -298,16 +307,16 @@ public class Picture
      //       }catch(Exception e){
      //           System.out.println("Pac dead: " + e.getMessage());
      //       }
-            if(i == 1){
-                food1.makeInvisible();
-            }else if(i == 2){
-                food2.makeInvisible();
-            }else if(i == 3) {
-                food3.makeInvisible();
-            }else{
-                // let him travel off the canvas.
-                continue;
+            if(i <= 3){
+                if (i == 1){
+                    food1.makeInvisible();
+                } else if (i == 2){
+                    food2.makeInvisible();
+                } else {
+                    food3.makeInvisible();
+                }
             }
         }
     }
+    
 }

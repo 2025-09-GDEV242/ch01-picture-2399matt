@@ -2,7 +2,7 @@ import java.awt.*;
 
 /**
  * A triangle that can be manipulated and that draws itself on a canvas.
- * testing git status
+ * MODIFIED: REFER TO DRAW() METHOD
  * @author  Michael Kšlling and David J. Barnes
  * @version 2016.02.29
  */
@@ -98,6 +98,20 @@ public class Triangle
         yPosition += distance;
         draw();
     }
+    
+    /**
+     * MoveVertical without the erase / draw calls to lessen the refresh on canvas.
+     */
+    public void moveVerticalNoDraw(int distance){
+        yPosition += distance;
+    }
+    
+    /**
+     * MoveHorizontal without the erase / draw calls to lessen the refresh on canvas.
+     */
+    public void moveHorizontalNoDraw(int distance){
+        xPosition += distance;
+    }
 
     /**
      * Slowly move the triangle horizontally by 'distance' pixels.
@@ -174,11 +188,26 @@ public class Triangle
     private void draw()
     {
         if(isVisible) {
+            // CHANGE: removing the erase() call for the build animation.
             Canvas canvas = Canvas.getCanvas();
             int[] xpoints = { xPosition, xPosition + (width/2), xPosition - (width/2) };
             int[] ypoints = { yPosition, yPosition + height, yPosition + height };
             canvas.draw(this, color, new Polygon(xpoints, ypoints, 3));
-            canvas.wait(10);
+            // CHANGE: 10 -> 5 second delay
+            canvas.wait(5);
+        }
+    }
+    
+    /**
+     * Draw method without the sleep calls, sleep will be done in animation loop.
+     */
+    public void drawFaster()
+    {
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            int[] xpoints = { xPosition, xPosition + (width/2), xPosition - (width/2) };
+            int[] ypoints = { yPosition, yPosition + height, yPosition + height };
+            canvas.draw(this, color, new Polygon(xpoints, ypoints, 3));
         }
     }
 
